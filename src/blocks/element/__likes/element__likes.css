@@ -1,0 +1,7 @@
+.element__likes {
+  color: black;
+  font-size: 13px;
+  position: absolute;
+  right: 25px;
+  bottom: 20px;
+}
