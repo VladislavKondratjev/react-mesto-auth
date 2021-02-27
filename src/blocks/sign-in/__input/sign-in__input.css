@@ -1,0 +1,10 @@
+.sign-in__input {
+  color: white;
+  border: 0;
+  outline: none;
+  margin-top: 8px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #cccccc;
+  background-color: black;
+  margin-bottom: 20px;
+}

@@ -5,9 +5,13 @@ import Main from './Main.js'
 import EditProfilePopup from './EditProfilePopup.js'
 import ImagePopup from './ImagePopup.js'
 import EditAvatarPopup from './EditAvatarPopup';
+import AddPlacePopup from './AddPlacePopup';
+import Login from './Login';
+import Register from './Register';
+import InfoToolTip from './InfoToolTip';
 import CurrentUserContext from '../contexts/CurrentUserContext'
 import { api } from "../utils/api";
-import AddPlacePopup from './AddPlacePopup';
+import { Route, Switch, } from "react-router-dom";
 
 export default function App() {
   const [isEditAvatarPopupOpen, setAvatarIsOpen] = React.useState(false);
@@ -37,8 +41,8 @@ export default function App() {
     setAvatarIsOpen(false);
     setAddIsOpen(false);
     setEditIsOpen(false);
-    //setConfirmIsOpen(false);
     setSelectedCard(false)
+    //setConfirmIsOpen(false);
   }
 
   function handleCardLike(card) {
@@ -112,7 +116,11 @@ export default function App() {
       <div className="page">
         <div className="page__container">
           <Header />
-          <Main
+          <InfoToolTip />
+          {/* <Switch> */}
+          {/* <Login /> */}
+          <Register />
+          {/* <Main
             cards={cards}
             onEditAvatar={handleEditAvatarClick}
             onEditProfile={handleEditProfileClick}
@@ -121,8 +129,7 @@ export default function App() {
             onCardClick={handleCardClick}
             onCardLike={handleCardLike}
             onCardDelete={handleCardDelete}
-          />
-          <Footer />
+          /> */}
           <ImagePopup
             name="image-caption"
             isOpen={selectedCard}
@@ -140,9 +147,11 @@ export default function App() {
             isOpen={isAddPlacePopupOpen}
             onClose={closeAllPopups}
             onAddPlace={handleAddPlaceSubmit} />
+          {/* </Switch> */}
+          <Footer />
         </div>
       </div >
-    </CurrentUserContext.Provider>
+    </CurrentUserContext.Provider >
   );
 }
 
