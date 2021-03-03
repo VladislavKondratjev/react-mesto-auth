@@ -2,14 +2,12 @@ import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
 export default function Register({ onRegister }) {
-    // задаем начальные значения для данных
     const initialData = {
         email: '',
         password: '',
     };
     const [data, setData] = useState(initialData);
     const history = useHistory();
-    // Обрабатываем изменения в инпутах и записываем их в стейт
     const handleChange = (e) => {
         const { name, value } = e.target;
         setData(data => ({
@@ -18,25 +16,19 @@ export default function Register({ onRegister }) {
         }));
     }
 
-    // Очищаем форму и ошибки
     const resetForm = () => {
         setData(initialData);
     }
 
     const handleSubmit = (e) => {
-        // Отменяем базовые действия при сабмите формы
         e.preventDefault();
-        // Если поле email или password пустое, то ничего не делаем
-        // (тут можно показывать ошибку, что поля не заполнены)
         if (!data.password || !data.email) {
             return;
         }
 
         onRegister(data)
             .then(resetForm)
-            // Перенаправляем пользователя на страницу логина при успешной регистрации
             .then(() => history.push('/sign-in'))
-            // Отлавливаем ошибки запроса
             .catch(err => console.log(err))
     }
 

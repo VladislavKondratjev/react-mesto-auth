@@ -1,9 +1,9 @@
 import React from 'react';
 import PopupWithForm from './PopupWithForm.js'
-import  CurrentUserContext  from '../contexts/CurrentUserContext'
+import CurrentUserContext from '../contexts/CurrentUserContext'
 
 export default function EditProfilePopup(props) {
-    const currentUser = React.useContext(CurrentUserContext);
+    const { currentUser } = React.useContext(CurrentUserContext);
     const [name, setName] = React.useState('')
     const [about, setDescription] = React.useState('')
 
@@ -18,8 +18,6 @@ export default function EditProfilePopup(props) {
             name,
             about
         });
-        // setName(' ')
-        // setDescription(' ')
     }
 
     function handleChangeName(e) {
@@ -40,6 +38,7 @@ export default function EditProfilePopup(props) {
         >
             <input
                 id="name"
+                name="name"
                 autoComplete="off"
                 type="text"
                 className="popup__input popup__input_type_name"
@@ -53,6 +52,7 @@ export default function EditProfilePopup(props) {
             <span id="name-error" className="error"></span>
             <input
                 id="description"
+                name="about"
                 autoComplete="off"
                 type="text"
                 className="popup__input popup__input_type_description"

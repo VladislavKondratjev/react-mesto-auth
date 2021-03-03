@@ -23,7 +23,7 @@ export default function App() {
   const [isInfoToolTipPopupOpen, setInfoToolTipIsOpen] = React.useState(false);
   const [success, setSuccess] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState(false);
-  const [currentUser, setCurrentUser] = React.useState(CurrentUserContext);
+  const [currentUser, setCurrentUser] = React.useState({});
   const [cards, setCards] = React.useState([]);
 
   function handleEditAvatarClick() {
