@@ -1,0 +1,10 @@
+.header__link {
+  text-decoration: none;
+  font-weight: normal;
+  margin-top: 18px;
+  margin-left: 12px;
+  font-size: 18px;
+  line-height: 22px;
+  color: white;
+  display: inline-block;
+}
