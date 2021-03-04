@@ -7,7 +7,8 @@
   border-bottom: 2px solid #cccccc;
   background-color: black;
   margin-bottom: 20px;
-  width: 358px;
+  width: 354px;
+  font-size: 15px;
 }
 
 @media screen and (max-width: 767px) {
