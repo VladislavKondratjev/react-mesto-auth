@@ -5,3 +5,12 @@
   line-height: 29px;
   margin-top: 61px;
 }
+
+@media screen and (max-width: 767px) {
+  .sign-in__title {
+    font-weight: 900;
+    font-size: 20px;
+    line-height: 24px;
+    margin-top: 44px;
+  }
+}

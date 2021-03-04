@@ -3,3 +3,9 @@
   display: flex;
   justify-content: space-between;
 }
+
+@media screen and (max-width: 767px) {
+  .header {
+    flex-direction: column-reverse;
+  }
+}

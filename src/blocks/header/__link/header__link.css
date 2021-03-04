@@ -8,3 +8,12 @@
   color: white;
   display: inline-block;
 }
+
+@media screen and (max-width: 767px) {
+  .header__link {
+    font-size: 14px;
+    line-height: 17px;
+    margin-top: 9px;
+    margin-left: -26px;
+  }
+}
