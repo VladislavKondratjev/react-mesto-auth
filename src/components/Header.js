@@ -9,24 +9,27 @@ export default function Header({ loggedIn, email, onSignOut, onBurgerOpen, isBur
     const burgerMenuClassName = (
         `${isBurgerMenuOpened ? 'header__burger-menu_close' : 'header__burger-menu'}`
     );
+    const headerClassName = (
+        `${loggedIn ? 'header' : 'header_unauthtorized'}`
 
+    )
     return (
-        <header className="header">
-            <Switch>
-                <img
-                    className="header__logo"
-                    src={logo}
-                    alt="Место Россия"
-                />
-                <ul className="header__links">
+        <header className={headerClassName}>
+            <img
+                className="header__logo"
+                src={logo}
+                alt="Место Россия"
+            />
+            <ul className="header__links">
+                <Switch>
                     <Route path="/sign-up">
                         <li className="header__link"><Link className="header__link link" to="/sign-in">Войти</Link></li>
                     </Route>
                     <Route path="/sign-in">
                         <li className="header__link"><Link className="header__link link" to="/sign-up">Регистрация</Link></li>
                     </Route>
-                </ul>
-            </Switch>
+                </Switch>
+            </ul>
             {loggedIn
                 ?
                 <>
