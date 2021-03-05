@@ -23,6 +23,7 @@ export default function App() {
   const [isInfoToolTipPopupOpen, setInfoToolTipIsOpen] = React.useState(false);
   const [success, setSuccess] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState(false);
+  const [isBurgerMenuOpened, setBurgerIsOpened] = React.useState(false)
   const [currentUser, setCurrentUser] = React.useState({});
   const [cards, setCards] = React.useState([]);
 
@@ -36,6 +37,14 @@ export default function App() {
 
   function handleAddPlaceClick() {
     setAddIsOpen(true)
+  }
+
+  function handleBurgerOpen() {
+    if (isBurgerMenuOpened === false) {
+      setBurgerIsOpened(true)
+    } else {
+      setBurgerIsOpened(false)
+    }
   }
 
   function handleCardClick(card) {
@@ -194,6 +203,9 @@ export default function App() {
             loggedIn={loggedIn}
             email={data.email}
             onSignOut={handleSignOut}
+            isBurgerMenuOpened={isBurgerMenuOpened}
+            onBurgerOpen={handleBurgerOpen}
+
           />
           <Switch>
             <ProtectedRoute
