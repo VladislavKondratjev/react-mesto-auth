@@ -1,12 +1,12 @@
 .footer {
   color: #545454;
   padding-top: 62px;
-  padding-bottom: 57px;
+  position: absolute;
+  bottom: 20px;
 }
 
 @media screen and (max-width: 767px) {
   .footer {
     padding-top: 0;
-    padding-bottom: 31px;
   }
 }
