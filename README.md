@@ -12,4 +12,4 @@
 
 **Ссылка на проект**
 
-- [Размещено на GitHub Pages](https://vladislavkondratjev.github.io/mesto-react/)
+- [Размещено на GitHub Pages](https://vladislavkondratjev.github.io/react-mesto-auth/)
