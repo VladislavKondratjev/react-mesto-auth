@@ -5,14 +5,13 @@ import { Route, Switch, Link } from "react-router-dom";
 export default function Header({ loggedIn, email, onSignOut, onBurgerOpen, isBurgerMenuOpened }) {
     const navigationClassName = (
         `${loggedIn ? 'header__nav' : 'header__nav_disabled'}`
-    )
+    );
     const burgerMenuClassName = (
         `${isBurgerMenuOpened ? 'header__burger-menu_close' : 'header__burger-menu'}`
     );
     const headerClassName = (
         `${loggedIn ? 'header' : 'header_unauthtorized'}`
-
-    )
+    );
     return (
         <header className={headerClassName}>
             <img
@@ -45,6 +44,6 @@ export default function Header({ loggedIn, email, onSignOut, onBurgerOpen, isBur
                     </>
                     : ''}
             </ul>
-        </header >
+        </header>
     )
 }

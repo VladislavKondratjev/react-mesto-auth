@@ -257,8 +257,8 @@ export default function App() {
             onClose={closeAllPopups}
           />
         </div>
-      </div >
-    </CurrentUserContext.Provider >
+      </div>
+    </CurrentUserContext.Provider>
   );
 }
 
