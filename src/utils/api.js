@@ -13,8 +13,9 @@ class Api {
 
     getInitialCards() {
         return fetch(`${this._address}/cards`, {
+            method: 'GET',
             headers: {
-                authorization: this._token,
+                'Authorization': `Bearer ${localStorage.getItem("jwt")}`,
                 'Content-Type': 'application/json'
             }
         })
@@ -23,9 +24,12 @@ class Api {
 
     getUserData() {
         return fetch(`${this._address}/users/me`, {
+            method: 'GET',
             headers: {
-                authorization: this._token,
-                'Content-Type': 'application/json'
+                'Authorization': `Bearer ${localStorage.getItem("jwt")}`,
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+
             }
         })
             .then((res) => this._apiAnswer(res))
@@ -35,7 +39,7 @@ class Api {
         return fetch(`${this._address}/users/me`, {
             method: 'PATCH',
             headers: {
-                authorization: this._token,
+                'Authorization': `Bearer ${localStorage.getItem("jwt")}`,
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
@@ -50,7 +54,7 @@ class Api {
         return fetch(`${this._address}/users/me/avatar`, {
             method: 'PATCH',
             headers: {
-                authorization: this._token,
+                'Authorization': `Bearer ${localStorage.getItem("jwt")}`,
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
@@ -64,7 +68,7 @@ class Api {
         return fetch(`${this._address}/cards`, {
             method: 'POST',
             headers: {
-                authorization: this._token,
+                'Authorization': `Bearer ${localStorage.getItem("jwt")}`,
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
@@ -79,7 +83,7 @@ class Api {
         return fetch(`${this._address}/cards/${id}`, {
             method: 'DELETE',
             headers: {
-                authorization: this._token,
+                'Authorization': `Bearer ${localStorage.getItem("jwt")}`,
                 'Content-Type': 'application/json'
             }
         })
@@ -90,7 +94,7 @@ class Api {
         return fetch(`${this._address}/cards/likes/${id}`, {
             method: 'PUT',
             headers: {
-                authorization: this._token,
+                'Authorization': `Bearer ${localStorage.getItem("jwt")}`,
                 'Content-Type': 'application/json'
             },
         })
@@ -101,7 +105,7 @@ class Api {
         return fetch(`${this._address}/cards/likes/${id}`, {
             method: 'DELETE',
             headers: {
-                authorization: this._token,
+                'Authorization': `Bearer ${localStorage.getItem("jwt")}`,
                 'Content-Type': 'application/json'
             }
         })
@@ -115,6 +119,6 @@ class Api {
 }
 
 export const api = new Api({
-    address: 'https://mesto.nomoreparties.co/v1/cohort-19',
-    token: 'cabe1d76-a428-4aaa-846e-7d735d853b84'
+    address: 'http://localhost:3000',
+    // token: `Bearer ${this._token}`
 })

@@ -62,14 +62,13 @@ export default function App() {
 
   function handleCardLike(card) {
     const isLiked = card.likes.some(i => i._id === currentUser._id);
-
     api.changeLikeCardStatus(card._id, !isLiked)
       .then((newCard) => {
         const newCards = cards.map((c) =>
           c._id === card._id
-            ? newCard
+            ? newCard.data
             : c);
-        setCards(newCards);
+        setCards(newCards.data);
       })
       .catch((err) => console.log(err));
   }
@@ -106,7 +105,7 @@ export default function App() {
   function handleAddPlaceSubmit(data) {
     api.postCard(data)
       .then((newCard) => {
-        setCards([newCard, ...cards])
+        setCards([newCard.data, ...cards])
         closeAllPopups()
       })
       .catch((err) => console.log(err));
@@ -133,7 +132,6 @@ export default function App() {
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [data, setData] = React.useState(initialData);
   const history = useHistory();
-
   const tokenCheck = React.useCallback(() => {
     const jwt = localStorage.getItem('jwt');
     if (jwt) {
@@ -205,7 +203,6 @@ export default function App() {
             onSignOut={handleSignOut}
             isBurgerMenuOpened={isBurgerMenuOpened}
             onBurgerOpen={handleBurgerOpen}
-
           />
           <Switch>
             <ProtectedRoute
