@@ -11,21 +11,21 @@ export default function Main(props) {
                 <div className="profile__overlay">
                     <img
                         className="profile__avatar"
-                        src={currentUser.data.avatar}
+                        src={currentUser.avatar}
                         alt="Аватар"
                         onClick={props.onEditAvatar}
                     />
                 </div>
                 <div className="profile__info">
                     <div className="profile__editor">
-                        <h1 className="profile__name">{currentUser.data.name}</h1>
+                        <h1 className="profile__name">{currentUser.name}</h1>
                         <button
                             type="button"
                             className="profile__edit-button button"
                             onClick={props.onEditProfile}
                         />
                     </div>
-                    <p className="profile__description">{currentUser.data.about}</p>
+                    <p className="profile__description">{currentUser.about}</p>
                 </div>
                 <button
                     type="button"

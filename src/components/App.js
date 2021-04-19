@@ -26,6 +26,13 @@ export default function App() {
   const [isBurgerMenuOpened, setBurgerIsOpened] = React.useState(false)
   const [currentUser, setCurrentUser] = React.useState({});
   const [cards, setCards] = React.useState([]);
+  const initialData = {
+    email: '',
+    password: ''
+  }
+  const [loggedIn, setLoggedIn] = React.useState(false);
+  const [data, setData] = React.useState(initialData);
+  const history = useHistory();
 
   function handleEditAvatarClick() {
     setAvatarIsOpen(true)
@@ -61,14 +68,14 @@ export default function App() {
   }
 
   function handleCardLike(card) {
-    const isLiked = card.likes.some(i => i._id === currentUser._id);
+    const isLiked = card.likes.some(i => i === currentUser._id);
     api.changeLikeCardStatus(card._id, !isLiked)
       .then((newCard) => {
         const newCards = cards.map((c) =>
           c._id === card._id
             ? newCard.data
             : c);
-        setCards(newCards.data);
+        setCards(newCards);
       })
       .catch((err) => console.log(err));
   }
@@ -87,7 +94,7 @@ export default function App() {
   function handleUpdateUser(data) {
     api.updateUserInfo(data)
       .then((res) => {
-        setCurrentUser(res)
+        setCurrentUser(res.data)
         closeAllPopups()
       })
       .catch((err) => console.log(err));
@@ -96,7 +103,7 @@ export default function App() {
   function handleUpdateAvatar(data) {
     api.updateAvatar(data)
       .then((res) => {
-        setCurrentUser(res)
+        setCurrentUser(res.data)
         closeAllPopups()
       })
       .catch((err) => console.log(err));
@@ -112,26 +119,21 @@ export default function App() {
   }
 
   React.useEffect(() => {
-    api.getUserData()
-      .then((res) => {
-        setCurrentUser(res)
-      })
-      .catch((err) => console.log(err));
+    if (loggedIn) {
+      api.getUserData()
+        .then((res) => {
+          setCurrentUser(res.data)
+        })
+        .catch((err) => console.log(err));
 
-    api.getInitialCards()
-      .then((res) => {
-        setCards(res);
-      })
-      .catch((err) => console.log(err));
-  }, [])
+      api.getInitialCards()
+        .then((res) => {
+          setCards(res.data.reverse());
+        })
+        .catch((err) => console.log(err));
+    }
+  }, [loggedIn])
 
-  const initialData = {
-    email: '',
-    password: ''
-  }
-  const [loggedIn, setLoggedIn] = React.useState(false);
-  const [data, setData] = React.useState(initialData);
-  const history = useHistory();
   const tokenCheck = React.useCallback(() => {
     const jwt = localStorage.getItem('jwt');
     if (jwt) {
@@ -151,19 +153,15 @@ export default function App() {
     }
   }, [history])
 
-  React.useEffect(() => {
-    tokenCheck();
-  }, [tokenCheck])
-
   const handleLogin = ({ email, password }) => {
     return auth.login(email, password)
       .then(res => {
         if (!res || res.statusCode === 400) throw new Error('Не передано одно из полей ');
         if (!res || res.statusCode === 401) throw new Error('Пользователь с таким email не найден');
         if (res.token) {
+          localStorage.setItem('jwt', res.token);
           setLoggedIn(true);
           setData({ email });
-          localStorage.setItem('jwt', res.token);
         }
       })
       .catch((err) => {
@@ -178,7 +176,7 @@ export default function App() {
         setSuccess(true);
         setInfoToolTipIsOpen(true);
         history.push('/sign-in');
-        return res;
+        return res.data;
       })
       .catch((err) => {
         console.log(err)
@@ -188,10 +186,15 @@ export default function App() {
 
   const handleSignOut = () => {
     localStorage.removeItem('jwt');
-    setData(initialData);
     setLoggedIn(false);
+    api.logout();
+    setBurgerIsOpened(false);
     history.push('/sign-in');
   }
+
+  React.useEffect(() => {
+    tokenCheck();
+  }, [tokenCheck])
 
   return (
     <CurrentUserContext.Provider value={{ currentUser }}>

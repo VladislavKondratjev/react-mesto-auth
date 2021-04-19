@@ -16,13 +16,14 @@ export const register = (email, password) => {
         .then(responseCheck)
 };
 
-export const login = (email, password) => {
+export const login = (email, password, token) => {
     return fetch(`${BASE_URL}/signin`, {
         method: 'POST',
         'credentials': 'include',
         headers: {
             'Accept': 'application/json',
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
         },
         body: JSON.stringify({ email, password })
     })
@@ -36,7 +37,7 @@ export const checkToken = (token) => {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${localStorage.getItem("jwt")}`,
+            'Authorization': `Bearer ${token}`,
         }
     })
         .then(responseCheck)

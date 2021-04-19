@@ -15,8 +15,10 @@ class Api {
         return fetch(`${this._address}/cards`, {
             method: 'GET',
             headers: {
-                'Authorization': `Bearer ${localStorage.getItem("jwt")}`,
-                'Content-Type': 'application/json'
+                // authorization: this._token, 
+                'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
             }
         })
             .then((res) => this._apiAnswer(res))
@@ -26,10 +28,9 @@ class Api {
         return fetch(`${this._address}/users/me`, {
             method: 'GET',
             headers: {
-                'Authorization': `Bearer ${localStorage.getItem("jwt")}`,
+                'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
-
             }
         })
             .then((res) => this._apiAnswer(res))
@@ -39,7 +40,7 @@ class Api {
         return fetch(`${this._address}/users/me`, {
             method: 'PATCH',
             headers: {
-                'Authorization': `Bearer ${localStorage.getItem("jwt")}`,
+                'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
@@ -54,7 +55,7 @@ class Api {
         return fetch(`${this._address}/users/me/avatar`, {
             method: 'PATCH',
             headers: {
-                'Authorization': `Bearer ${localStorage.getItem("jwt")}`,
+                'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
@@ -68,7 +69,7 @@ class Api {
         return fetch(`${this._address}/cards`, {
             method: 'POST',
             headers: {
-                'Authorization': `Bearer ${localStorage.getItem("jwt")}`,
+                'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
@@ -83,7 +84,7 @@ class Api {
         return fetch(`${this._address}/cards/${id}`, {
             method: 'DELETE',
             headers: {
-                'Authorization': `Bearer ${localStorage.getItem("jwt")}`,
+                'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
                 'Content-Type': 'application/json'
             }
         })
@@ -94,7 +95,7 @@ class Api {
         return fetch(`${this._address}/cards/likes/${id}`, {
             method: 'PUT',
             headers: {
-                'Authorization': `Bearer ${localStorage.getItem("jwt")}`,
+                'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
                 'Content-Type': 'application/json'
             },
         })
@@ -105,7 +106,7 @@ class Api {
         return fetch(`${this._address}/cards/likes/${id}`, {
             method: 'DELETE',
             headers: {
-                'Authorization': `Bearer ${localStorage.getItem("jwt")}`,
+                'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
                 'Content-Type': 'application/json'
             }
         })
@@ -116,9 +117,17 @@ class Api {
         return state ? this.putLike(id) : this.deleteLike(id)
     }
 
+    logout = () => {
+        return fetch(`${this._address}/logout`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${localStorage.removeItem('jwt')}`,
+            },
+        })
+    };
 }
 
 export const api = new Api({
     address: 'http://localhost:3000',
-    // token: `Bearer ${this._token}`
+    token: `Bearer ${localStorage.getItem('jwt')}`,
 })

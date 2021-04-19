@@ -39,7 +39,7 @@ export default function AddPlacePopup(props) {
                 maxLength="30"
                 required
                 onChange={handleChangeName}
-                value={name || ''}
+                value={name}
             />
             <span id="place-error" className="error"></span>
             <input
@@ -51,7 +51,7 @@ export default function AddPlacePopup(props) {
                 type="url"
                 required
                 onChange={handleChangeLink}
-                value={link || ''}
+                value={link}
             />
             <span id="url-error" className="error"></span>
             <button type="submit" className="popup__submit-button">Создать</button>
